@@ -70,8 +70,13 @@ class SenseKeyedVectors(KeyedVectors):
                 ex = ""
             sense_labels.append(f"[{sense_x.id}]{sense_x.definition}: {ex}")
             sense_freqs.append(self.query_sense_freq(sense_x))
-                
+
+        if len(vecs):
+            stack_vecs = np.vstack(vecs)
+        else:
+            stack_vecs = np.array([])
+
         return SenseData(sense_ids, sense_labels, sense_freqs, 
-                np.vstack(vecs))
+                stack_vecs)
 
 
