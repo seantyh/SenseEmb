@@ -15,8 +15,10 @@ load_naming = function(){
     naming = merge(naming, msyl, by.x="Character", by.y="mw")
     naming$rEV = log(naming$mw_nE+1)-log(naming$mw_nV+1)
     naming = merge(naming ,ambig, by.x="Character", by.y="Character")
-    names(naming)[names(naming) == "Semantic Ambiguity Rating"] = "sar"
-    names(naming)[names(naming) == "Log CD"] = "log_CD"
+    sapply(list(c("Semantic Ambiguity Rating", "sar"), 
+                c("Log CD", "log_CD")), function(x){
+        names(naming)[names(naming)==x[1]] = x[2]
+    })
     return(naming)
 }
 
