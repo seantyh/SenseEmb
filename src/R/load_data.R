@@ -15,10 +15,13 @@ load_naming = function(){
     naming = merge(naming, msyl, by.x="Character", by.y="mw")
     naming$rEV = log(naming$mw_nE+1)-log(naming$mw_nV+1)
     naming = merge(naming ,ambig, by.x="Character", by.y="Character")
+    var_names = names(naming)
     sapply(list(c("Semantic Ambiguity Rating", "sar"), 
                 c("Log CD", "log_CD")), function(x){
-        names(naming)[names(naming)==x[1]] = x[2]
+        var_names[var_names==x[1]] = x[2]
+        assign('var_names', var_names, envir=parent.env(environment()))
     })
+    names(naming) = var_names
     return(naming)
 }
 
